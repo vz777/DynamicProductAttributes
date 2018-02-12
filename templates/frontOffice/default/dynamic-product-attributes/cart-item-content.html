@@ -1,0 +1,12 @@
+{* Ce code est injecté dans les tables "panier" via javascript *}
+{loop type="cart" name="dpa-cart"}
+    {ifloop rel="dpa"}
+        <script type="text/html" class="dynamic-attributes-values" data-cart-item-id="{$ITEM_ID}" data-cart-item-index="{$LOOP_COUNT-1}">
+            {loop type="dynamicproductattributes.attribute-value" name="dpa" cart_item_id=$ITEM_ID}
+                <dt class="attributeView">{$ATTRIBUTE_TITLE}</dt>
+                <dd>{$ATTRIBUTE_VALUE}</dd>
+            {/loop}
+        </script>
+    {/ifloop}
+{/loop}
+

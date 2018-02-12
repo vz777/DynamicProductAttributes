@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns="http://thelia.net/schema/dic/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
+
+    <loops>
+        <loop name="dynamicproductattributes.attributes" class="DynamicProductAttributes\Loop\Attributes" />
+        <loop name="dynamicproductattributes.attribute-value" class="DynamicProductAttributes\Loop\AttributeValue" />
+    </loops>
+
+    <services>
+        <service id="dynamicproductattributes.listener" class="DynamicProductAttributes\EventListeners\EventManager">
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="thelia.translator"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+
+    <hooks>
+        <hook id="dynamicproductattributes.hokks" class="DynamicProductAttributes\Hook\HookManager">
+            <tag name="hook.event_listener" event="cart.javascript-initialization" type="front" />
+            <tag name="hook.event_listener" event="product.javascript-initialization" type="front"/>
+            <tag name="hook.event_listener" event="order-invoice.javascript-initialization" type="front"/>
+        </hook>
+    </hooks>
+
+</config>

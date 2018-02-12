@@ -1,0 +1,22 @@
+{* Ce code est injecté dans le formulaire d'ajout au panier via javascript *}
+<script type="text/html" class="dynamic-attributes-form-fields">
+{ifloop rel="dpa"}
+    {form name="thelia.cart.add" }
+    <fieldset>
+        {loop type="dynamicproductattributes.attributes" name="dpa" product_id=$product_id}
+        {form_field field="dynamic_attribute_$ATTRIBUTE_ID"}
+            <div class="form-group {if $error}has-error{elseif $value != "" && !$error}has-success{/if}">
+                <label for="{$label_attr.for}">{$label}</label>
+                <input type="text" name="{$name}" id="{$label_attr.for}" data-attribute-title="{$ATTRIBUTE_TITLE|htmlspecialchars}" class="form-control dynamic-attribute" value="{$value}">
+                {if $error }
+                    <span class="help-block">{$message}</span>
+                {elseif $value != "" && !$error}
+                    <span class="help-block"><i class="fa fa-check"></i></span>
+                {/if}
+            </div>
+        {/form_field}
+        {/loop}
+    </fieldset>
+    {/form}
+{/ifloop}
+</script>

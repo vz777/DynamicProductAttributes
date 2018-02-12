@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="thelia"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="../../../core/vendor/propel/propel/resources/xsd/database.xsd" >
+    <table name="dynamic_product_attribute" namespace="DynamicProductAttributes\Model">
+        <column name="id" autoIncrement="true" primaryKey="true" required="true" type="INTEGER" />
+        <column name="cart_item_id" required="true" type="INTEGER" />
+        <column name="attribute_id" required="true" type="INTEGER" />
+        <column name="attribute_value" type="CLOB" />
+
+        <foreign-key foreignTable="cart_item" name="fk_dynamic_product_attribute_cart_item" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="cart_item_id" />
+        </foreign-key>
+
+        <foreign-key foreignTable="attribute" name="fk_dynamic_product_attribute_attribute" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="attribute_id" />
+        </foreign-key>
+    </table>
+
+    <external-schema filename="local/config/schema.xml" referenceOnly="true" />
+</database>
