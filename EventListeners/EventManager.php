@@ -15,6 +15,7 @@ use DynamicProductAttributes\Model\DynamicProductAttributeQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Thelia\Core\Event\Cart\CartEvent;
@@ -94,7 +95,7 @@ class EventManager implements EventSubscriberInterface
             foreach ($atList as $at) {
                 $event->getForm()->getFormBuilder()->add(
                     "dynamic_attribute_" . $at->getAttributeId(),
-                    'text',
+                    TextType::class,
                     [
                         'required' => true,
                         'constraints' => [ new NotBlank() ],
